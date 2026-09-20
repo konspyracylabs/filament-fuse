@@ -3,7 +3,7 @@
 A live circuit-breaker dashboard for your Filament panel, on top of
 [`harris21/laravel-fuse`](https://github.com/harris21/laravel-fuse).
 
-![The dashboard with one circuit breaker open](art/dashboard-open.png)
+![The dashboard with one circuit breaker open](https://raw.githubusercontent.com/konspyracylabs/filament-fuse/main/art/dashboard-open.png)
 
 ## What it does
 
@@ -161,15 +161,15 @@ FilamentFusePlugin::make()->authorize(fn (?User $user): bool => $user?->hasRole(
 <details>
 <summary>Closed, the circuit page, a drill, dark mode</summary>
 
-![Every circuit breaker closed](art/dashboard-closed.png)
+![Every circuit breaker closed](https://raw.githubusercontent.com/konspyracylabs/filament-fuse/main/art/dashboard-closed.png)
 
-![The page of an open circuit](art/circuit-open.png)
+![The page of an open circuit](https://raw.githubusercontent.com/konspyracylabs/filament-fuse/main/art/circuit-open.png)
 
-![The page of a closed circuit](art/circuit-closed.png)
+![The page of a closed circuit](https://raw.githubusercontent.com/konspyracylabs/filament-fuse/main/art/circuit-closed.png)
 
-![A drill holding the testing circuit open](art/drill.png)
+![A drill holding the testing circuit open](https://raw.githubusercontent.com/konspyracylabs/filament-fuse/main/art/drill.png)
 
-![The dashboard in dark mode](art/dashboard-dark.png)
+![The dashboard in dark mode](https://raw.githubusercontent.com/konspyracylabs/filament-fuse/main/art/dashboard-dark.png)
 
 </details>
 

@@ -2,6 +2,13 @@
 
 All notable changes to this package are documented here.
 
+## 0.1.2 — 2026-09-21
+
+### Fixed
+
+- The README's screenshots are linked by absolute URL, so they also render where the
+  README is shown away from GitHub. Nothing in the package itself changes.
+
 ## 0.1.1 — 2026-09-21
 
 ### Fixed
