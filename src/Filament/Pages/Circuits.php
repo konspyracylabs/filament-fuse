@@ -3,11 +3,12 @@
 namespace KonspyracyLabs\FilamentFuse\Filament\Pages;
 
 use Filament\Actions\Action;
-use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use KonspyracyLabs\FilamentFuse\Data\CircuitSnapshot;
+use KonspyracyLabs\FilamentFuse\FilamentFuseServiceProvider;
 use KonspyracyLabs\FilamentFuse\Support\CircuitInspector;
+use RuntimeException;
 
 /**
  * The dashboard: the monitored circuit, live, in two sections.
@@ -103,10 +104,29 @@ class Circuits extends FusePage
                 ->iconButton()
                 ->color('gray')
                 ->modalHeading(__('filament-fuse::filament-fuse.glossary.heading'))
-                ->modalContent(fn (): View => app(ViewFactory::class)->make('filament-fuse::glossary'))
+                ->modalContent(fn (): View => $this->glossary())
                 ->modalSubmitAction(false)
                 ->modalCancelActionLabel(__('filament-fuse::filament-fuse.glossary.close')),
         ];
+    }
+
+    /**
+     * The glossary shown behind the header's information button.
+     *
+     * The name is built from the package's view namespace rather than written out, and
+     * checked before it is rendered: a static analyser only accepts a view name it can
+     * prove exists, and a missing template should say so plainly rather than fail from
+     * somewhere inside the view factory.
+     */
+    private function glossary(): View
+    {
+        $view = FilamentFuseServiceProvider::$viewNamespace.'::glossary';
+
+        if (! view()->exists($view)) {
+            throw new RuntimeException("View [{$view}] not found.");
+        }
+
+        return view()->make($view);
     }
 
     /**
