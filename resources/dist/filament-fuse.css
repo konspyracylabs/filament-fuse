@@ -1,0 +1,659 @@
+/* ============================================================================
+   fuse-monitor.css — konspyracylabs/filament-fuse
+   ----------------------------------------------------------------------------
+   One scoped stylesheet. No Tailwind config, no utility classes, no build step.
+   No external assets: type is set in the system UI and monospace faces, so the
+   panel never asks anybody else's server for a font.
+
+   Everything lives under .fuse-monitor so nothing leaks into the host panel.
+   Dark/light is driven off the `dark` class Filament toggles on <html> —
+   this file never sets a theme and ships no toggle.
+   ============================================================================ */
+
+/* ---------------------------------------------------------------- tokens */
+
+.fuse-monitor {
+    /* light is the base; .dark overrides below */
+    --fuse-font: ui-sans-serif, system-ui, sans-serif;
+    --fuse-mono: ui-monospace, SFMono-Regular, monospace;
+
+    --fuse-page: #f8fafc;
+    --fuse-panel: #ffffff;
+    --fuse-panel-2: #ffffff;
+    --fuse-raised: #f8fafc;
+    --fuse-border: #e2e8f0;
+    --fuse-hairline: #e2e8f0;
+
+    --fuse-text: #0f172a;
+    --fuse-text-subtle: #475569;
+    --fuse-text-muted: #64748b;
+    --fuse-text-faint: #94a3b8;
+
+    --fuse-cyan: #0891b2;
+    --fuse-closed: #059669;
+    --fuse-open: #dc2626;
+    --fuse-half: #d97706;
+    --fuse-purple: #7c3aed;
+
+    --fuse-closed-wash: rgba(5, 150, 105, 0.08);
+    --fuse-open-wash: rgba(220, 38, 38, 0.07);
+    --fuse-half-wash: rgba(217, 119, 6, 0.07);
+    --fuse-cyan-wash: rgba(8, 145, 178, 0.06);
+
+    --fuse-panel-bg: var(--fuse-panel);
+    --fuse-panel-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --fuse-grid: rgba(0, 0, 0, 0.02);
+
+    --fuse-radius: 14px;
+    --fuse-radius-sm: 10px;
+    --fuse-radius-xs: 7px;
+    --fuse-gap: 16px;
+
+    --fuse-glow-open: 0 4px 20px rgba(220, 38, 38, 0.15);
+    --fuse-glow-half: 0 4px 20px rgba(217, 119, 6, 0.15);
+    --fuse-glow-open-peak: 0 4px 24px rgba(220, 38, 38, 0.20);
+    --fuse-glow-half-peak: 0 4px 24px rgba(217, 119, 6, 0.19);
+    --fuse-glow-closed: 0 4px 20px rgba(5, 150, 105, 0.15);
+    --fuse-glow-cyan: 0 4px 20px rgba(8, 145, 178, 0.15);
+    --fuse-text-glow: none;
+
+    font-family: var(--fuse-font);
+    color: var(--fuse-text);
+}
+
+.dark .fuse-monitor {
+    --fuse-page: #0a0a0f;
+    --fuse-panel: #12121a;
+    --fuse-panel-2: #0d0d14;
+    --fuse-raised: #1a1a24;
+    --fuse-border: rgba(0, 240, 255, 0.1);
+    --fuse-hairline: #2a2a3a;
+
+    --fuse-text: #ffffff;
+    --fuse-text-subtle: rgba(255, 255, 255, 0.6);
+    --fuse-text-muted: rgba(255, 255, 255, 0.4);
+    --fuse-text-faint: rgba(255, 255, 255, 0.3);
+
+    --fuse-cyan: #00f0ff;
+    --fuse-closed: #00ff88;
+    --fuse-open: #ff3366;
+    --fuse-half: #ffaa00;
+    --fuse-purple: #a855f7;
+
+    --fuse-closed-wash: rgba(0, 255, 136, 0.08);
+    --fuse-open-wash: rgba(255, 51, 102, 0.12);
+    --fuse-half-wash: rgba(255, 170, 0, 0.1);
+    --fuse-cyan-wash: rgba(0, 240, 255, 0.08);
+
+    --fuse-panel-bg: linear-gradient(135deg, rgba(18, 18, 26, 0.9), rgba(13, 13, 20, 0.95));
+    --fuse-panel-shadow: none;
+    --fuse-grid: rgba(0, 240, 255, 0.03);
+
+    --fuse-glow-open: 0 0 30px rgba(255, 51, 102, 0.4), inset 0 0 30px rgba(255, 51, 102, 0.1);
+    --fuse-glow-half: 0 0 30px rgba(255, 170, 0, 0.4), inset 0 0 30px rgba(255, 170, 0, 0.1);
+    --fuse-glow-open-peak: 0 0 34px rgba(255, 51, 102, 0.44), inset 0 0 32px rgba(255, 51, 102, 0.11);
+    --fuse-glow-half-peak: 0 0 33px rgba(255, 170, 0, 0.43), inset 0 0 31px rgba(255, 170, 0, 0.11);
+    --fuse-glow-closed: none;
+    --fuse-glow-cyan: 0 0 30px rgba(0, 240, 255, 0.4), inset 0 0 30px rgba(0, 240, 255, 0.1);
+    --fuse-text-glow: 0 0 20px currentColor;
+}
+
+/* --------------------------------------------------------------- surfaces */
+
+.fuse-panel {
+    background: var(--fuse-panel-bg);
+    border: 1px solid var(--fuse-border);
+    border-radius: var(--fuse-radius);
+    box-shadow: var(--fuse-panel-shadow);
+}
+
+.dark .fuse-panel {
+    backdrop-filter: blur(10px);
+}
+
+/* ------------------------------------------------------------- typography */
+
+.fuse-label {
+    font-family: var(--fuse-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fuse-text-muted);
+    line-height: 1.3;
+}
+
+.fuse-mono {
+    font-family: var(--fuse-mono);
+}
+
+/* ----------------------------------------------------------- state icon */
+
+.fuse-state__icon {
+    width: 1.25em;
+    height: 1.25em;
+    flex: none;
+}
+
+/* ------------------------------------------------------------------ dot */
+
+.fuse-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    flex: none;
+    background: currentColor;
+}
+
+.fuse-dot--closed { background: var(--fuse-closed); }
+.fuse-dot--open { background: var(--fuse-open); box-shadow: 0 0 8px var(--fuse-open); }
+.fuse-dot--half-open { background: var(--fuse-half); }
+
+.fuse-dot--live {
+    width: 0.625rem;
+    height: 0.625rem;
+    background: var(--fuse-cyan);
+    animation: fuse-blink 2.4s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------ metric card */
+
+.fuse-metric {
+    position: relative;
+    overflow: hidden;
+    padding: 1.125rem;
+    border-radius: 0.75rem;
+    background: var(--fuse-panel-bg);
+    border: 1px solid var(--fuse-border);
+    box-shadow: var(--fuse-panel-shadow);
+}
+
+.fuse-metric::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--fuse-metric-accent, var(--fuse-cyan)), transparent);
+    opacity: 0.5;
+}
+
+.fuse-metric--cyan { --fuse-metric-accent: var(--fuse-cyan); }
+.fuse-metric--closed { --fuse-metric-accent: var(--fuse-closed); }
+.fuse-metric--open { --fuse-metric-accent: var(--fuse-open); }
+.fuse-metric--half-open { --fuse-metric-accent: var(--fuse-half); }
+
+.fuse-metric__value {
+    font-size: clamp(1.75rem, 3vw, 2.875rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-top: 0.25rem;
+    color: var(--fuse-metric-accent, var(--fuse-cyan));
+    text-shadow: var(--fuse-text-glow);
+}
+
+.fuse-metric__caption {
+    font-family: var(--fuse-mono);
+    font-size: 0.6875rem;
+    color: var(--fuse-text-muted);
+}
+
+/* ------------------------------------------------------------------- tile */
+
+.fuse-tiles {
+    display: grid;
+    gap: var(--fuse-gap);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 1279px) { .fuse-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 1023px) { .fuse-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 639px) { .fuse-tiles { grid-template-columns: minmax(0, 1fr); } }
+
+.fuse-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    position: relative;
+    overflow: hidden;
+    padding: 1.125rem 1.25rem;
+    border-radius: var(--fuse-radius);
+    background: var(--fuse-panel-bg);
+    border: 1px solid var(--fuse-border);
+    box-shadow: var(--fuse-panel-shadow);
+    color: inherit;
+    text-decoration: none;
+    min-height: 2.75rem;
+}
+
+.fuse-tile:focus-visible {
+    outline: 2px solid var(--fuse-cyan);
+    outline-offset: 2px;
+}
+
+/* An open tile is marked by its border and the section it sits in; no glow, no pulse. */
+.fuse-tile--open {
+    border-color: var(--fuse-open);
+}
+
+.fuse-tile--half-open {
+    border-color: var(--fuse-half);
+    animation: fuse-pulse-half 4.2s ease-in-out infinite;
+}
+
+.fuse-tile__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.625rem;
+}
+
+.fuse-tile__name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+    font-family: var(--fuse-mono);
+    font-size: 1rem;
+}
+
+.fuse-tile__duration {
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.fuse-tile--open .fuse-tile__duration { color: var(--fuse-open); }
+.fuse-tile--half-open .fuse-tile__duration { color: var(--fuse-half); }
+
+.fuse-tile__facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.625rem 0.875rem;
+    font-family: var(--fuse-mono);
+    font-size: 0.75rem;
+}
+
+.fuse-tile__fact-value {
+    color: var(--fuse-text-subtle);
+    margin-top: 2px;
+}
+
+/* one-line collapsed form used for healthy circuits below 640px */
+@media (max-width: 639px) {
+    .fuse-tile--collapsible.fuse-tile--closed {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 0.875rem;
+    }
+    .fuse-tile--collapsible.fuse-tile--closed .fuse-tile__facts,
+    .fuse-tile--collapsible.fuse-tile--closed .fuse-tile__duration {
+        display: none;
+    }
+}
+
+/* ------------------------------------------------------------------- orb */
+
+.fuse-orb-ctn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fuse-orb__ring {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 1px dashed var(--fuse-hairline);
+    animation: fuse-spin 30s linear infinite;
+}
+
+.fuse-orb {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    border: 3px solid currentColor;
+    transition: all 0.5s ease;
+}
+
+.fuse-orb--closed {
+    color: color-mix(in srgb, var(--fuse-closed) 60%, transparent);
+    background: radial-gradient(circle at 30% 30%,
+        color-mix(in srgb, var(--fuse-closed) 22%, transparent),
+        color-mix(in srgb, var(--fuse-closed) 8%, transparent) 50%, transparent 70%);
+    box-shadow: var(--fuse-glow-closed);
+}
+
+.fuse-orb--open {
+    color: color-mix(in srgb, var(--fuse-open) 60%, transparent);
+    background: radial-gradient(circle at 30% 30%,
+        color-mix(in srgb, var(--fuse-open) 25%, transparent),
+        color-mix(in srgb, var(--fuse-open) 10%, transparent) 50%, transparent 70%);
+    box-shadow: var(--fuse-glow-open);
+    animation: fuse-pulse-open 3.4s ease-in-out infinite;
+}
+
+.fuse-orb--half-open {
+    color: color-mix(in srgb, var(--fuse-half) 60%, transparent);
+    background: radial-gradient(circle at 30% 30%,
+        color-mix(in srgb, var(--fuse-half) 25%, transparent),
+        color-mix(in srgb, var(--fuse-half) 10%, transparent) 50%, transparent 70%);
+    box-shadow: var(--fuse-glow-half);
+    animation: fuse-pulse-half 4.2s ease-in-out infinite;
+}
+
+.fuse-orb__state {
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    text-shadow: var(--fuse-text-glow);
+}
+
+.fuse-orb--closed .fuse-orb__state { color: var(--fuse-closed); }
+.fuse-orb--open .fuse-orb__state { color: var(--fuse-open); }
+.fuse-orb--half-open .fuse-orb__state { color: var(--fuse-half); }
+
+@media (max-width: 639px) {
+    .fuse-orb { width: 180px; height: 180px; }
+    .fuse-orb__ring { width: 206px; height: 206px; }
+    .fuse-orb__state { font-size: 1.625rem; }
+}
+
+/* ------------------------------------------------------- topbar indicator */
+
+.fuse-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5625rem;
+    min-height: 2.375rem;
+    padding: 0.4375rem 0.8125rem;
+    border-radius: 0.5625rem;
+    text-decoration: none;
+    border: 1px solid transparent;
+    font-family: var(--fuse-mono);
+    font-size: 0.8125rem;
+}
+
+.fuse-indicator--ok {
+    color: var(--fuse-text-subtle);
+    background: var(--fuse-closed-wash);
+    border-color: color-mix(in srgb, var(--fuse-closed) 24%, transparent);
+}
+
+/* Loud by colour and weight, not by glow: it sits in the host's topbar, next to
+   controls that never glow, and has to look like it belongs there. */
+.fuse-indicator--down {
+    color: var(--fuse-open);
+    font-weight: 600;
+    background: var(--fuse-open-wash);
+    border-color: color-mix(in srgb, var(--fuse-open) 45%, transparent);
+}
+
+/* --------------------------------------------------------- empty / error */
+
+.fuse-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 3.75rem;
+    text-align: center;
+}
+
+.fuse-empty__heading {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--fuse-text-subtle);
+    margin: 0;
+}
+
+.fuse-empty--good .fuse-empty__heading { color: var(--fuse-closed); }
+
+.fuse-empty__body {
+    margin: 0;
+    max-width: 44rem;
+    font-size: 1.0625rem;
+    line-height: 1.5;
+    color: var(--fuse-text-muted);
+    text-wrap: pretty;
+}
+
+.fuse-empty__code {
+    margin: 0;
+    text-align: left;
+    font-family: var(--fuse-mono);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    padding: 1.375rem 1.625rem;
+    border-radius: 0.75rem;
+    background: var(--fuse-panel-2);
+    border: 1px solid var(--fuse-hairline);
+    color: var(--fuse-text-subtle);
+    overflow-x: auto;
+}
+
+.fuse-error {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.625rem 1.75rem;
+    border-radius: var(--fuse-radius);
+    background: var(--fuse-panel-bg);
+    border: 1px solid color-mix(in srgb, var(--fuse-open) 35%, transparent);
+}
+
+/* ------------------------------------------------------------- animation */
+
+@keyframes fuse-pulse-open {
+    0%, 100% { box-shadow: var(--fuse-glow-open); }
+    50% { box-shadow: var(--fuse-glow-open-peak); }
+}
+
+@keyframes fuse-pulse-half {
+    0%, 100% { box-shadow: var(--fuse-glow-half); }
+    50% { box-shadow: var(--fuse-glow-half-peak); }
+}
+
+@keyframes fuse-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+@keyframes fuse-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* State must stay readable with every animation removed. */
+@media (prefers-reduced-motion: reduce) {
+    .fuse-monitor *,
+    .fuse-monitor *::before,
+    .fuse-monitor *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+    .fuse-tile--open,
+    .fuse-indicator--down {
+        border-width: 2px;
+    }
+}
+
+/* Forced colours: fall back to system colours, keep the icons. */
+@media (forced-colors: active) {
+    .fuse-tile,
+    .fuse-indicator {
+        border: 1px solid CanvasText;
+        box-shadow: none;
+        forced-color-adjust: none;
+        background: Canvas;
+        color: CanvasText;
+    }
+}
+
+/* ============================================================================
+   Layout — added by the package, not part of the design handoff above.
+
+   Every rule from here down replaces an inline style that used to sit in a
+   Blade template. Kept in one block so the design tokens above stay verbatim
+   and a host theme can override the page structure without touching them.
+   ============================================================================ */
+
+/* ------------------------------------------------------------ page rhythm */
+
+.fuse-section { margin-top: 1.5rem; }
+
+/* -------------------------------------------------------------- live strip */
+
+.fuse-live {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 1rem;
+}
+
+.fuse-live__label { color: var(--fuse-cyan); }
+
+/* ---------------------------------------------------------- dashboard groups */
+
+.fuse-group + .fuse-divider { margin: 1.75rem 0; }
+
+.fuse-divider {
+    border: 0;
+    border-top: 1px solid var(--fuse-hairline);
+}
+
+.fuse-group__head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.625rem;
+    margin: 0 0 0.875rem;
+    font-family: var(--fuse-mono);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fuse-text-muted);
+}
+
+.fuse-group--down .fuse-group__head { color: var(--fuse-open); }
+.fuse-group--healthy .fuse-group__head { color: var(--fuse-closed); }
+
+.fuse-group__count {
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0;
+}
+
+.fuse-group__empty {
+    margin: 0;
+    font-family: var(--fuse-mono);
+    font-size: 0.875rem;
+    color: var(--fuse-text-muted);
+}
+
+/* ---------------------------------------------------------------- glossary */
+
+.fuse-glossary {
+    margin: 0;
+    display: grid;
+    gap: 1.125rem;
+}
+
+.fuse-glossary__row { margin: 0; }
+
+.fuse-glossary__term {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--fuse-mono);
+    font-weight: 600;
+    font-size: 0.9375rem;
+}
+
+.fuse-glossary__term--closed { color: var(--fuse-closed); }
+.fuse-glossary__term--open { color: var(--fuse-open); }
+.fuse-glossary__term--half-open { color: var(--fuse-half); }
+.fuse-glossary__term--unknown { color: var(--fuse-text-muted); }
+
+.fuse-glossary__body {
+    margin: 0.25rem 0 0;
+    line-height: 1.5;
+    color: var(--fuse-text-subtle);
+}
+
+/* -------------------------------------------------------------------- hero */
+
+.fuse-hero { padding: 2rem; }
+
+.fuse-hero__body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+}
+
+/*
+ * A column with a gap rather than margins on the children: the duration line is absent
+ * for a circuit with nothing to measure, and a margin above the facts would then indent
+ * the first thing on the panel against nothing.
+ */
+.fuse-hero__side {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    flex: 1 1 22rem;
+    min-width: 0;
+}
+
+.fuse-hero__duration { font-size: 1.75rem; }
+
+.fuse-hero__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.fuse-hero__fact-value { margin-top: 0.25rem; }
+
+.fuse-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: var(--fuse-gap);
+    margin-top: 2rem;
+}
+
+/* ----------------------------------------------------------- empty / error */
+
+.fuse-empty__icon {
+    width: 3rem;
+    height: 3rem;
+    opacity: 0.4;
+}
+
+.fuse-error__icon {
+    width: 2rem;
+    height: 2rem;
+    flex: none;
+    color: var(--fuse-open);
+}
+
+.fuse-error__heading {
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.fuse-error__body { margin-top: 0.375rem; }
+
+/* inside the hero the panel already draws the frame */
+.fuse-error--bare {
+    border: 0;
+    padding: 0;
+}

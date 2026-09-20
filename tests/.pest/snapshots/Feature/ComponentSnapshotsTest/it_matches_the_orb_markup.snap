@@ -1,0 +1,8 @@
+<div class="fuse-orb-ctn">
+    <div class="fuse-orb__ring" aria-hidden="true"></div>
+
+    <div class="fuse-orb fuse-orb--open">
+        <div class="fuse-orb__state">Open</div>
+        <div class="fuse-label">stripe</div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+# Path-based git attributes
+# https://www.kernel.org/pub/software/scm/git/docs/gitattributes.html
+
+# Normalise line endings to LF in the repository, regardless of contributor platform.
+# Without this, a Windows checkout produces CRLF working files and Pint reports a
+# line_ending violation on every file in the package.
+* text=auto eol=lf
+
+# Keep development-only files out of the Composer dist archive with "export-ignore",
+# so an application that installs this package receives the plugin and nothing else.
+/CONTRIBUTING.md        export-ignore
+/SECURITY.md            export-ignore
+/.editorconfig          export-ignore
+/.github                export-ignore
+/art                    export-ignore
+/.gitattributes         export-ignore
+/.gitignore             export-ignore
+/.idea                  export-ignore
+/.vscode                export-ignore
+/phpstan.neon.dist      export-ignore
+/phpunit.xml.dist       export-ignore
+/pint.json              export-ignore
+/rector.php             export-ignore
+/tests                  export-ignore
+/vendor                 export-ignore
+composer.lock           export-ignore

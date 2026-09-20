@@ -1,0 +1,22 @@
+<a href="/admin/fuse/circuit/stripe" class="fuse-tile fuse-tile--collapsible fuse-tile--open">
+    <div class="fuse-tile__head">
+        <span class="fuse-tile__name">
+            <span class="fuse-dot fuse-dot--open" aria-hidden="true"></span>
+            <span>stripe</span>
+        </span>
+    </div>
+
+            <div class="fuse-tile__duration">Open for 4m 12s</div>
+    
+    <div class="fuse-tile__facts">
+        <div>
+            <div class="fuse-label">Last worked</div>
+            <div class="fuse-tile__fact-value">14:02</div>
+        </div>
+
+        <div>
+            <div class="fuse-label">Next probe</div>
+            <div class="fuse-tile__fact-value">in 0:48</div>
+        </div>
+    </div>
+</a>

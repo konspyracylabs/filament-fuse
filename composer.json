@@ -1,0 +1,88 @@
+{
+    "name": "konspyracylabs/filament-fuse",
+    "description": "Filament panel plugin for harris21/laravel-fuse — a live circuit-breaker dashboard in the panel you already have.",
+    "keywords": [
+        "konspyracylabs",
+        "laravel",
+        "filamentphp",
+        "filament",
+        "filament-plugin",
+        "circuit-breaker",
+        "fuse",
+        "observability",
+        "filament-fuse"
+    ],
+    "homepage": "https://github.com/konspyracylabs/filament-fuse",
+    "support": {
+        "issues": "https://github.com/konspyracylabs/filament-fuse/issues",
+        "source": "https://github.com/konspyracylabs/filament-fuse"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Konspyracy Labs",
+            "email": "dev@konspyracylabs.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "filament/filament": "^5.0",
+        "harris21/laravel-fuse": "^0.10",
+        "illuminate/contracts": "^11.0|^12.0|^13.0",
+        "spatie/laravel-package-tools": "^1.16"
+    },
+    "require-dev": {
+        "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.27",
+        "nunomaduro/collision": "^8.0",
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "pestphp/pest": "^3.7|^4.0",
+        "pestphp/pest-plugin-arch": "^3.0|^4.0",
+        "pestphp/pest-plugin-laravel": "^3.0|^4.0",
+        "pestphp/pest-plugin-livewire": "^3.0|^4.0",
+        "rector/rector": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "KonspyracyLabs\\FilamentFuse\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "KonspyracyLabs\\FilamentFuse\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "analyse": "phpstan analyse",
+        "lint": "pint",
+        "refactor": "rector",
+        "test": "pest",
+        "test:snapshots": "pest --update-snapshots",
+        "test:lint": "pint --test",
+        "test:refactor": "rector --dry-run",
+        "finalize": [
+            "@refactor",
+            "@lint",
+            "@analyse",
+            "@test"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "KonspyracyLabs\\FilamentFuse\\FilamentFuseServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

@@ -1,0 +1,6 @@
+<div class="fuse-monitor">
+        <a href="http://localhost/testing/fuse" class="fuse-indicator fuse-indicator--ok" aria-label="Circuit breaker status">
+            <span class="fuse-dot fuse-dot--closed" aria-hidden="true"></span>
+            All closed
+        </a>
+    </div>

@@ -1,0 +1,34 @@
+name: Feature request
+description: Something the package should do that it does not yet.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before filing, check the README's "What it does" section — this package
+        deliberately watches one circuit. Monitoring several at once is planned for a
+        separate Pro edition rather than missing from this one.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What are you trying to see or do, as an operator, that you cannot today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you would like
+      description: How it might look in the panel, or in config, or on the plugin.
+    validations:
+      required: true
+
+  - type: textarea
+    id: data
+    attributes:
+      label: Where the data would come from
+      description: |
+        This package only shows what Fuse's own cache actually provides, and keeps no
+        database of its own. If your request needs history Fuse does not keep, say so.

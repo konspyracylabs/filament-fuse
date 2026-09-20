@@ -1,0 +1,22 @@
+<a href="/admin/fuse/circuit/stripe" class="fuse-tile fuse-tile--collapsible fuse-tile--unknown">
+    <div class="fuse-tile__head">
+        <span class="fuse-tile__name">
+            <span class="fuse-dot fuse-dot--unknown" aria-hidden="true"></span>
+            <span>stripe</span>
+        </span>
+    </div>
+
+            <div class="fuse-tile__duration">State unreadable</div>
+    
+    <div class="fuse-tile__facts">
+        <div>
+            <div class="fuse-label">Last worked</div>
+            <div class="fuse-tile__fact-value">never</div>
+        </div>
+
+        <div>
+            <div class="fuse-label">Next probe</div>
+            <div class="fuse-tile__fact-value">—</div>
+        </div>
+    </div>
+</a>

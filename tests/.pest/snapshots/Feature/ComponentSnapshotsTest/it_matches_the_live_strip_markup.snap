@@ -1,0 +1,10 @@
+<div class="fuse-live">
+    <span class="fuse-dot fuse-dot--live" aria-hidden="true"></span>
+    <span class="fuse-label fuse-live__label">Live</span>
+
+    <span class="fuse-label">
+        Updated 14:06:31
+
+                    &middot; every 5 s
+            </span>
+</div>

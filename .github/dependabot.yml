@@ -1,0 +1,17 @@
+version: 2
+updates:
+  - package-ecosystem: composer
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    # Fuse is pinned to one minor on purpose; a bump there needs the contract test run
+    # by hand and a CHANGELOG entry, not an automatic PR. See CONTRIBUTING.md.
+    ignore:
+      - dependency-name: harris21/laravel-fuse
+        update-types: ["version-update:semver-minor", "version-update:semver-major"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
