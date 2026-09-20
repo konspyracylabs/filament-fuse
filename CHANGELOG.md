@@ -2,6 +2,15 @@
 
 All notable changes to this package are documented here.
 
+## 0.1.1 — 2026-09-21
+
+### Fixed
+
+- Static analysis failed on Linux for the dashboard's glossary: its view name was written
+  out as a literal, which the analyser could not prove exists there. It is now built from
+  the package's view namespace and checked before rendering, as the components' names
+  already are. Nothing about the panel changes.
+
 ## 0.1.0 — 2026-09-20
 
 First release.
