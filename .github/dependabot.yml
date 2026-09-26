@@ -5,6 +5,15 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    # Let a release sit before taking it. A compromised or broken package is usually
+    # caught and yanked within days, and nothing here is urgent enough to be first to
+    # install it. Security updates are a separate feed and ignore this entirely, so a
+    # published advisory still arrives at once.
+    cooldown:
+      default-days: 7
+      semver-major-days: 30
+      semver-minor-days: 7
+      semver-patch-days: 3
     # Fuse is pinned to one minor on purpose; a bump there needs the contract test run
     # by hand and a CHANGELOG entry, not an automatic PR. See CONTRIBUTING.md.
     ignore:
@@ -15,3 +24,8 @@ updates:
     directory: /
     schedule:
       interval: monthly
+    # The actions in .github/workflows are pinned to a commit SHA, so these PRs move
+    # the SHA and the version comment beside it. This ecosystem supports default-days
+    # only — the semver-*-days keys are not read for it.
+    cooldown:
+      default-days: 7
